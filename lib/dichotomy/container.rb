@@ -11,7 +11,7 @@ module Dichotomy
     def initialize
       initialize_state
       add_extension(Extensions::DefaultExtension.new)
-      add_extension(Extensions::TestExtension.new)
+      #add_extension(Extensions::TestExtension.new)
     end
 
     #methods mixed in from DefaultExtension
@@ -28,18 +28,6 @@ module Dichotomy
     def initialize_state
       @build_manager = Base::Managers::BuildManager.new
       @extensions = Array.new
-    end
-
-    def build_subject(type)
-      subject = @build_manager.build_subject(type)
-      @build_manager.reset_strategies
-      subject
-    end
-
-    def build_object(type)
-      object = @build_manager.build_object(type)
-      @build_manager.reset_strategies
-      object
     end
   end
 end

@@ -8,10 +8,6 @@ module Dichotomy
           @container = container
           @build_manager = build_manager
         end
-
-        def add_registration_observer(klass)
-          @container.add_observer(klass)
-        end
       end
     end
   end

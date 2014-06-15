@@ -8,27 +8,29 @@ module Dichotomy
   module Base
     module Managers
       class BuildManager
-        attr_reader :subject_strategies, :object_strategies
+        attr_reader :strategies, :registered_listeners
 
         def initialize
-          @registered_types = Hash.new
-          @subject_strategies = Builders::Strategies::StagedStrategyChain.new(Builders::SubjectBuilder::BuildStage)
-          @object_strategies = Builders::Strategies::StagedStrategyChain.new(Builders::ObjectBuilder::BuildStage)
+          @strategies = Builders::Strategies::StagedStrategyChain.new(Builders::SubjectBuilder::BuildStage)
+          @registered_listeners = Array.new
         end
 
-        def build_subject(type)
-          context = Builders::SubjectBuilder::BuildContext.new(@subject_strategies.make_strategy_chain, type)
-          return context.strategies.execute_build_up(context)
+        def add_observer(klass)
+          @registered_listeners.push(klass)
         end
 
-        def build_object(type)
-          context = Builders::ObjectBuilder::BuildContext.new(@object_strategies.make_strategy_chain, type)
+        def build(type)
+          context = Builders::SubjectBuilder::BuildContext.new(@strategies.make_strategy_chain, type, self)
+          @strategies.clear_strategies
+          @registered_listeners.each do |klass|
+            context.add_observer(klass)
+          end
+
           return context.strategies.execute_build_up(context)
         end
 
         def reset_strategies
-          @subject_strategies.clear_strategies
-          @object_strategies.clear_strategies
+          @strategies.clear_strategies
         end
       end
     end

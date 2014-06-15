@@ -1,6 +1,7 @@
 require 'dichotomy'
+require 'example_dependency'
 
 dichotomy_container = Dichotomy::Container.new
-subject = dichotomy_container.register_type(Class)
+object = dichotomy_container.resolve_type(ExampleDependency)
 
 debug = nil

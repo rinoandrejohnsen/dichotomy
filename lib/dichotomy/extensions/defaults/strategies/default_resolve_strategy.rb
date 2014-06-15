@@ -2,13 +2,15 @@ module Dichotomy
   module Extensions
     module Defaults
       module Strategies
-        class DefaultSubjectStrategy
+        class DefaultResolveStrategy
           def pre_build_up(build_context)
-            puts "pre_build_up"
+            puts 'resolve_pre_build_up'
+
+            build_context.new_build_up(Class)
           end
 
           def post_build_up(build_context)
-            puts "post_build_up"
+            puts 'resolve_post_build_up'
           end
         end
       end

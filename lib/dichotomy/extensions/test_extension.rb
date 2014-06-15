@@ -9,7 +9,7 @@ module Dichotomy
       end
 
       def on_register_type(type)
-        @context.build_manager.subject_strategies.add(Tests::Strategies::TestSubjectStrategy.new, 0)
+        @context.build_manager.subject_strategies.add(Tests::Strategies::TestSubjectStrategy.new, 1)
       end
 
       def update(type, symbol)
