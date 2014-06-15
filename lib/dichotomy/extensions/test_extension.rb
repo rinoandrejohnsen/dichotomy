@@ -5,16 +5,21 @@ module Dichotomy
   module Extensions
     class TestExtension < Base::Extension::ContainerExtension
       def initialize_context
-        @context.add_registration_observer(self)
+
       end
 
       def on_register_type(type)
-        @context.build_manager.subject_strategies.add(Tests::Strategies::TestSubjectStrategy.new, 1)
+        @context.build_manager.strategies.add(Tests::Strategies::TestSubjectStrategy.new, 1)
       end
 
-      def update(type, symbol)
+      def observed_notifications(symbol, type)
         # catches the event from DefaultStrategy
         if symbol === :register_type
+          on_register_type(type)
+        end
+
+        #remove me after test
+        if symbol === :resolve_type
           on_register_type(type)
         end
       end

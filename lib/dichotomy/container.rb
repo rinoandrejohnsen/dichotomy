@@ -11,7 +11,7 @@ module Dichotomy
     def initialize
       initialize_state
       add_extension(Extensions::DefaultExtension.new)
-      #add_extension(Extensions::TestExtension.new)
+      add_extension(Extensions::TestExtension.new)
     end
 
     #methods mixed in from DefaultExtension
