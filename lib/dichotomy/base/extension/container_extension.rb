@@ -16,11 +16,11 @@ module Dichotomy
         protected
 
         def initialize_context
-          raise "SubclassResponsibility"
+          raise 'SubclassResponsibility'
         end
 
         def observed_notifications(symbol, type)
-          raise "SubclassResponsibility"
+          raise 'SubclassResponsibility'
         end
       end
     end

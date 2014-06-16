@@ -22,6 +22,10 @@ module Dichotomy
         if symbol === :resolve_type
           on_register_type(type)
         end
+
+        if symbol === :new_build_up
+          on_register_type(type)
+        end
       end
     end
   end

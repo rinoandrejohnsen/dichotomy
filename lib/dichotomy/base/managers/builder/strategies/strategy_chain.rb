@@ -1,7 +1,7 @@
 module Dichotomy
   module Base
     module Managers
-      module Builders
+      module Builder
         module Strategies
           class StrategyChain
             def initialize

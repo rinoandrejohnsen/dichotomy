@@ -9,7 +9,8 @@ module Dichotomy
     include Observable
 
     def initialize
-      initialize_state
+      @build_manager = Base::Managers::BuildManager.new
+      @extensions = Array.new
       add_extension(Extensions::DefaultExtension.new)
       add_extension(Extensions::TestExtension.new)
     end
@@ -21,13 +22,6 @@ module Dichotomy
     def add_extension(extension)
       @extensions.push(extension)
       extension.initialize_extension(Base::Extension::ExtensionContext.new(self, @build_manager))
-    end
-
-    private
-
-    def initialize_state
-      @build_manager = Base::Managers::BuildManager.new
-      @extensions = Array.new
     end
   end
 end

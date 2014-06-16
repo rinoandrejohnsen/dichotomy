@@ -1,9 +1,9 @@
-require 'dichotomy/base/managers/builders/strategies/strategy_chain'
+require 'dichotomy/base/managers/builder/strategies/strategy_chain'
 
 module Dichotomy
   module Base
     module Managers
-      module Builders
+      module Builder
         module Strategies
           class StagedStrategyChain
             def initialize(build_stage)
