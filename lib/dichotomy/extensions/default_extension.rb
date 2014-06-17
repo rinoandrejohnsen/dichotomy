@@ -1,7 +1,8 @@
 require 'dichotomy/base/extension/container_extension'
 require 'dichotomy/extensions/defaults/extension_methods'
-require 'dichotomy/extensions/defaults/strategies/default_register_strategy'
+require 'dichotomy/extensions/defaults/strategies/pre_creation_strategy'
 require 'dichotomy/extensions/defaults/strategies/default_resolve_strategy'
+require 'dichotomy/base/managers/builder/build_stage'
 
 module Dichotomy
   module Extensions
@@ -28,11 +29,11 @@ module Dichotomy
       end
 
       def on_register_type(type)
-        @context.build_manager.strategies.add(Defaults::Strategies::DefaultRegisterStrategy.new, 1)
+        @context.build_manager.strategies.add(Defaults::Strategies::PreCreationStrategy.new, Base::Managers::Builder::BuildStage::PRE_CREATION)
       end
 
       def on_resolve_type(type)
-        @context.build_manager.strategies.add(Defaults::Strategies::DefaultResolveStrategy.new, 1)
+        @context.build_manager.strategies.add(Defaults::Strategies::DefaultResolveStrategy.new, Base::Managers::Builder::BuildStage::PRE_CREATION)
       end
     end
   end
