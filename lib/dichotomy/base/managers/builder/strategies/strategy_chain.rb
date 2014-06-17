@@ -19,6 +19,8 @@ module Dichotomy
             end
 
             def execute_build_up(build_context)
+
+
               @strategies.each do |strategy|
                 strategy.pre_build_up(build_context)
               end

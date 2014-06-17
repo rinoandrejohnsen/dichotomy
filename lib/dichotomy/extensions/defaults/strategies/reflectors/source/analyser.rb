@@ -1,4 +1,5 @@
 require 'parser/current'
+require 'dichotomy/extensions/defaults/strategies/reflectors/source/interpreter'
 
 module Dichotomy
   module Extensions
@@ -6,7 +7,7 @@ module Dichotomy
       module Strategies
         module Reflectors
           module Source
-            class SourceAnalyser
+            class Analyser
               def initialize
                 @parser = Parser::CurrentRuby.new
               end
@@ -14,13 +15,13 @@ module Dichotomy
               def analyse(filename)
                 buffer = Parser::Source::Buffer.new(filename).read
                 ast = @parser.parse(buffer)
-                source_interpreter = SourceInterpreter.new
-                subject = source_interpreter.create_subject(buffer, ast)
+                interpreter = Interpreter.new
+                rapport = interpreter.create_rapport(buffer, ast)
 
                 @parser.reset
                 p ast
 
-                subject
+                rapport
               end
             end
           end

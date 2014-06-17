@@ -1,4 +1,5 @@
 require 'parser/current'
+require 'dichotomy/extensions/defaults/strategies/reflectors/source/rapport'
 
 module Dichotomy
   module Extensions
@@ -6,25 +7,25 @@ module Dichotomy
       module Strategies
         module Reflectors
           module Source
-            class SourceInterpreter < Parser::Rewriter
+            class Interpreter < Parser::Rewriter
               def initialize
-                @subject = Common::Models::Subject.new('')
+                @rapport = Rapport.new('')
               end
 
               def on_begin(node)
                 @node = node
 
                 name = @node.location.expression.source_buffer.name
-                @subject.filename = name
-                @subject.name = name[/([^\/]+)$/].chomp('.rb')
+                @rapport.filename = name
+                @rapport.name = name[/([^\/]+)$/].chomp('.rb')
 
                 find_methods
                 #find_dependencies
               end
 
-              def create_subject(buffer, ast)
+              def create_rapport(buffer, ast)
                 self.rewrite(buffer, ast)
-                @subject
+                @rapport
               end
 
               private
@@ -39,14 +40,14 @@ module Dichotomy
                     arguments_node.children.each do |args_child_node|
                       args_child_node.children.each do |arg|
                         if child_node.children[0].eql? :initialize # add check for Symbol
-                          @subject.dependencies.push(Common::Models::SubjectDependency.new(arg))
+                          @rapport.dependencies.push(arg)
                         end
 
                         argumentsHash.push(arg)
                       end
                     end
 
-                    @subject.methods.push(Common::Models::SubjectMethod.new(child_node.children[0], argumentsHash))
+                    @rapport.methods.push({child_node.children[0] => argumentsHash})
                   end
                 end
               end

@@ -5,7 +5,8 @@ module Dichotomy
         class TestSubjectStrategy
           def pre_build_up(build_context)
             puts 'test_pre_build_up'
-            build_context.built_type = Class.new
+            #build_context.built_type = Class.new
+            #build_context
           end
 
           def post_build_up(build_context)
