@@ -37,7 +37,7 @@ Or install it yourself as:
     $ gem install dichotomy
 
 ## Usage
-
+```ruby
     require 'dichotomy'
     require 'example_dependency'
     require 'example_dependency_two'
@@ -48,6 +48,7 @@ Or install it yourself as:
     example_dependency_subject_two = dichotomy_container.register_type(ExampleDependencyTwo)
     
     dichotomy_container.resolve_type(example_dependency_subject_two)
+```
 
 ## Contributing
 
