@@ -4,12 +4,23 @@ Dichotomy is an Inversion of Control Container for Ruby applications.
 
 Dichotomy provides architectural plumbing that allows you to create and manage application components, and acts as the Application Composition layer.
 
+## The vision
+
+An ioc container should "fuzzy" match dependencies to inject based on what members and method calls are used on the dependencies of a function.
+
+## Other implementations
+
+[@torgeir](https://twitter.com/torgeir) provided the first implementation and did it in JavaScript.
+
+The project can be found here: [fuzzyioc](https://github.com/torgeir/fuzzyioc)
+
+
 ## Features
 
 Dichotomy provides:
 
-* Simple, dependency injection
-* More to come here
+* Dependency injection by "fuzzy" matching classes
+* Enables you to create container extensions that add functionality to the container.
 
 ## Installation
 
@@ -27,7 +38,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    require 'dichotomy'
+    require 'example_dependency'
+    require 'example_dependency_two'
+    
+    dichotomy_container = Dichotomy::Container.new
+    
+    example_dependency_subject = dichotomy_container.register_type(ExampleDependency)
+    example_dependency_subject_two = dichotomy_container.register_type(ExampleDependencyTwo)
+    
+    dichotomy_container.resolve_type(example_dependency_subject_two)
 
 ## Contributing
 
