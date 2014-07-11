@@ -1,4 +1,8 @@
 class ExampleDependency
+  def initialize
+
+  end
+
   def run
     puts 'run'
   end

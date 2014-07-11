@@ -19,7 +19,7 @@ module Dichotomy
                 rapport = interpreter.create_rapport(buffer, ast)
 
                 @parser.reset
-                p ast
+                #p ast
 
                 rapport
               end

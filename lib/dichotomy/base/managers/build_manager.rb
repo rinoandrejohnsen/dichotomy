@@ -11,6 +11,7 @@ module Dichotomy
         def initialize
           @strategies = Builder::Strategies::StagedStrategyChain.new(Builder::BuildStage)
           @registered_listeners = Array.new
+          @registered_types = Array.new
         end
 
         def add_observer(klass)
@@ -18,7 +19,7 @@ module Dichotomy
         end
 
         def build(type)
-          context = Builder::BuildContext.new(@strategies.make_strategy_chain, type, self)
+          context = Builder::BuildContext.new(@strategies.make_strategy_chain, type, self, @registered_types)
 
           @strategies.clear_strategies
 
@@ -26,7 +27,13 @@ module Dichotomy
             context.add_observer(klass)
           end
 
-          context.strategies.execute_build_up(context)
+          type = context.strategies.execute_build_up(context)
+
+          if (type)
+            @registered_types.push(type)
+          end
+
+          type
         end
 
         def reset_strategies

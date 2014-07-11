@@ -4,13 +4,13 @@ module Dichotomy
       module Strategies
         class DefaultResolveStrategy
           def pre_build_up(build_context)
-            puts 'resolve_pre_build_up'
 
-            build_context.new_build_up(Class)
+
+            #build_context.new_build_up(Class)
           end
 
           def post_build_up(build_context)
-            puts 'resolve_post_build_up'
+
           end
         end
       end

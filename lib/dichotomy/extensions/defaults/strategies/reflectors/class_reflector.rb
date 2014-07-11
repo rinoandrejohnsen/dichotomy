@@ -12,7 +12,7 @@ module Dichotomy
 
             def create_rapport(klass)
               source_location = get_source_location(klass)
-              rapport = @analyser.analyse(source_location[0]) # perhaps support all files?@
+              rapport = @analyser.analyse(source_location[0]) # perhaps support all files?
               rapport
             end
 

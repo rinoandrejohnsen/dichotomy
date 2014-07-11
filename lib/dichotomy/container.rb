@@ -15,13 +15,24 @@ module Dichotomy
       add_extension(Extensions::TestExtension.new)
     end
 
-    #methods mixed in from DefaultExtension
-    # - register_type(type) : returns Subject
-    # - resolve_type(type) : returns Object
-
     def add_extension(extension)
       @extensions.push(extension)
       extension.initialize_extension(Base::Extension::ExtensionContext.new(self, @build_manager))
+    end
+
+    def method_missing(m, *args, &block)
+      symbol = m.to_sym
+      type = args[0]
+           
+      notify(symbol, type)
+
+      @build_manager.build(type)
+    end
+
+    def notify(symbol, type)
+      changed
+
+      notify_observers(symbol, type)
     end
   end
 end

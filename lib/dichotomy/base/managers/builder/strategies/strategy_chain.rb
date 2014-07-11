@@ -28,7 +28,7 @@ module Dichotomy
                 strategy.post_build_up(build_context)
               end
 
-              puts 'completed the build'
+              puts ' --**-- completed the build --**-- '
 
               build_context.built_type
             end

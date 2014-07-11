@@ -7,7 +7,7 @@ module Dichotomy
             class Rapport
               attr_accessor :id, :name, :methods, :properties, :dependencies, :filename
 
-              def initialize(name, methods = Array.new, properties = Array.new, dependencies = Array.new, filename = '')
+              def initialize(name, methods = Array.new, properties = Array.new, dependencies = Hash.new, filename = '')
                 @name = name
                 @methods = methods
                 @properties = properties

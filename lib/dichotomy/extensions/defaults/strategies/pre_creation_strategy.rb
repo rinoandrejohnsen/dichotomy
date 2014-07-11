@@ -6,8 +6,6 @@ module Dichotomy
       module Strategies
         class PreCreationStrategy
           def pre_build_up(build_context)
-            puts 'PreCreationStrategy_pre_build_up'
-
             original_type = build_context.original_type
 
             class_reflector = Reflectors::ClassReflector.new
@@ -16,7 +14,7 @@ module Dichotomy
           end
 
           def post_build_up(build_context)
-            puts 'PreCreationStrategy_post_build_up'
+
           end
         end
       end

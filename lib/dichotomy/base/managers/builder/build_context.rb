@@ -7,13 +7,14 @@ module Dichotomy
         class BuildContext
           include Observable
 
-          attr_accessor :strategies, :original_type, :built_type
+          attr_accessor :strategies, :original_type, :built_type, :registered_types
 
-          def initialize(strategies, type, build_manager)
+          def initialize(strategies, type, build_manager, types)
             @strategies = strategies
             @original_type = type
             @built_type = nil
             @build_manager = build_manager
+            @registered_types = types
           end
 
           def new_build_up(type)
@@ -24,7 +25,7 @@ module Dichotomy
             #the appropriate strategy for the change
             notify_observers(:new_build_up, type)
 
-            context = Builder::BuildContext.new(@build_manager.strategies.make_strategy_chain, type, @build_manager)
+            context = Builder::BuildContext.new(@build_manager.strategies.make_strategy_chain, type, @build_manager, @registered_types)
             @build_manager.registered_listeners.each do |klass|
               context.add_observer(klass)
             end
